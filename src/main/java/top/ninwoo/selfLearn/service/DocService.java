@@ -11,13 +11,15 @@ import java.util.Random;
  * 关于文档的相关服务
  */
 public class DocService {
+    // 无缓存模式
+    private static QuestionService questionService = new QuestionService();
+    // 缓存模式
+    //private static QuestionCacheService questionService = new QuestionCacheService();
     /**
      * 生成试题集
      * @param srcDocValue 题目列表
      * @return 返回题目的位置
      */
-    private static QuestionService questionService = new QuestionService();
-
     public static String generateDoc(SrcDocValue srcDocValue) {
         StringBuffer sb = new StringBuffer();
         List<Integer> questionList = srcDocValue.getQuestionList();

@@ -57,7 +57,7 @@ public class MultiThreadCacheDemo {
     }
 
     public static void main(String[] args) {
-        int page = 8;
+        int page = 4;
 
         // 初始化
         QuestionBank.initQuestions(800);
