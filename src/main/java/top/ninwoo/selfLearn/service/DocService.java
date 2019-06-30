@@ -12,9 +12,9 @@ import java.util.Random;
  */
 public class DocService {
     // 无缓存模式
-    private static QuestionService questionService = new QuestionService();
+    // private static QuestionService questionService = new QuestionService();
     // 缓存模式
-    //private static QuestionCacheService questionService = new QuestionCacheService();
+    private static QuestionCacheService questionService = new QuestionCacheService();
     /**
      * 生成试题集
      * @param srcDocValue 题目列表
@@ -24,8 +24,7 @@ public class DocService {
         StringBuffer sb = new StringBuffer();
         List<Integer> questionList = srcDocValue.getQuestionList();
         for (Integer questionId : questionList) {
-            String s = questionService.makeQuestion(questionId,
-                    QuestionBank.questions.get(questionId).getDetail());
+            String s = questionService.makeQuestion(QuestionBank.questions.get(questionId));
             sb.append(s);
         }
         // 保持题目

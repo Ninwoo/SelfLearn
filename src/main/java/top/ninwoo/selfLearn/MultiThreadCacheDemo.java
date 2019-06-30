@@ -1,10 +1,14 @@
 package top.ninwoo.selfLearn;
 
+import top.ninwoo.selfLearn.assist.BusiWorkTime;
 import top.ninwoo.selfLearn.assist.QuestionBank;
 import top.ninwoo.selfLearn.pojo.SrcDocValue;
 import top.ninwoo.selfLearn.service.DocService;
 
+import java.util.Random;
 import java.util.concurrent.*;
+
+import static top.ninwoo.selfLearn.assist.QuestionBank.*;
 
 /**
  * 添加缓存机制，防止重复生成相同题目
@@ -55,12 +59,34 @@ public class MultiThreadCacheDemo {
             return DocService.uploadDoc(srcDoc);
         }
     }
-
+    private static class UpdateThread extends Thread {
+        @Override
+        public void run() {
+            System.out.println("更新线程启动！");
+            int questionSize = questions.size();
+            Random random = new Random();
+            while(!isInterrupted()) {
+                int id = random.nextInt(questionSize);
+                System.out.println("更新一次：" + id);
+                updateQuestion(id, createQuestionDetail(800));
+                // 每一秒更新一次题目
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    interrupt();
+                }
+            }
+        }
+    }
     public static void main(String[] args) {
         int page = 4;
 
         // 初始化
-        QuestionBank.initQuestions(800);
+        QuestionBank.initQuestions(80);
+
+        // 启动更新线程
+        UpdateThread updateThread = new UpdateThread();
+        updateThread.start();
 
         long start = System.currentTimeMillis();
 
@@ -97,5 +123,6 @@ public class MultiThreadCacheDemo {
         //关闭线程池
         uploadDocPool.shutdown();
         generateDocPool.shutdown();
+        updateThread.interrupt();
     }
 }

@@ -35,7 +35,7 @@ public class QuestionBank {
      * @param length 题目长度
      * @return
      */
-    private static String createQuestionDetail(int length) {
+    public static String createQuestionDetail(int length) {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
 
         Random random = new Random();
@@ -57,7 +57,7 @@ public class QuestionBank {
         int questionId = questionInDB.getId();
         questions.put(id, new QuestionInDB(questionId,
                 questionDetail, EncryptUtils.getSHA(questionDetail)));
-        System.out.println("更新题目[id:" + id + ",content:"+questionDetail + "]");
+        //System.out.println("更新题目[id:" + id + ",content:"+questionDetail + "]");
         return true;
     }
 
