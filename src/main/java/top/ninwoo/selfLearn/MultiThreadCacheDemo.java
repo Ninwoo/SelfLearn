@@ -12,6 +12,10 @@ import static top.ninwoo.selfLearn.assist.QuestionBank.*;
 
 /**
  * 添加缓存机制，防止重复生成相同题目
+ *
+ * TODO:
+ *  存在问题，一个线程正在生成题目中，无法从缓存中获取到值，而另外一个线程也要开始创建相同的题目
+ *  浪费时间。
  */
 public class MultiThreadCacheDemo {
     // 生成Doc的线程池
