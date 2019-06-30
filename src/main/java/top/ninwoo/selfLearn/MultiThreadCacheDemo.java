@@ -7,9 +7,9 @@ import top.ninwoo.selfLearn.service.DocService;
 import java.util.concurrent.*;
 
 /**
- * 添加线程池，实现可以并行的生成多分文档
+ * 添加缓存机制，防止重复生成相同题目
  */
-public class MultiThreadDemo {
+public class MultiThreadCacheDemo {
     // 生成Doc的线程池
     private static final ExecutorService generateDocPool
             = Executors.newFixedThreadPool(4);

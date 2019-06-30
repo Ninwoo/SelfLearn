@@ -16,9 +16,9 @@ public class DocService {
      * @param srcDocValue 题目列表
      * @return 返回题目的位置
      */
-    private QuestionService questionService = new QuestionService();
+    private static QuestionService questionService = new QuestionService();
 
-    public String generateDoc(SrcDocValue srcDocValue) {
+    public static String generateDoc(SrcDocValue srcDocValue) {
         StringBuffer sb = new StringBuffer();
         List<Integer> questionList = srcDocValue.getQuestionList();
         for (Integer questionId : questionList) {
@@ -36,7 +36,7 @@ public class DocService {
      * @param srcDoc 本地试题位置
      * @return 返回题目的网页链接
      */
-    public String uploadDoc(String srcDoc) {
+    public static String uploadDoc(String srcDoc) {
         // 模拟上传时间
         Random r = new Random();
         BusiWorkTime.work(9000 + r.nextInt(400));
